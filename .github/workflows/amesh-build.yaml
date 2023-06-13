@@ -6,7 +6,6 @@ on:
 jobs:
   build-amesh:
     runs-on: ubuntu-latest
-    needs: changes
     steps:
       - uses: actions/checkout@v2
       - name: Log in to Docker Hub
