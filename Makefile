@@ -111,28 +111,11 @@ prepare-images: build-amesh-iptables-image build-amesh-controller-image build-am
 	docker tag $(AMESH_IPTABLES_IMAGE):$(AMESH_IPTABLES_IMAGE_TAG) $(REGISTRY)/$(AMESH_IPTABLES_IMAGE):$(AMESH_IPTABLES_IMAGE_TAG)
 	docker tag $(AMESH_SIDECAR_IMAGE):$(AMESH_SIDECAR_IMAGE_TAG) $(REGISTRY)/$(AMESH_SIDECAR_IMAGE):$(AMESH_SIDECAR_IMAGE_TAG)
 
-	docker pull istio/pilot:1.13.1
-	docker tag istio/pilot:1.13.1 $(REGISTRY)/istio/pilot:1.13.1
-
-	docker pull nginx:1.19.3
-	docker tag nginx:1.19.3 $(REGISTRY)/nginx:1.19.3
-
-	docker pull kennethreitz/httpbin
-	docker tag kennethreitz/httpbin $(REGISTRY)/kennethreitz/httpbin
-
-	docker pull curlimages/curl
-	docker tag curlimages/curl $(REGISTRY)/curlimages/curl
-
 .PHONY: push-images
 push-images:
 	docker push $(REGISTRY)/$(AMESH_IPTABLES_IMAGE):$(AMESH_IPTABLES_IMAGE_TAG)
 	docker push $(REGISTRY)/$(AMESH_SIDECAR_IMAGE):$(AMESH_SIDECAR_IMAGE_TAG)
 	docker push $(REGISTRY)/amesh-controller:latest
-
-	docker push $(REGISTRY)/istio/pilot:1.13.1
-	docker push $(REGISTRY)/nginx:1.19.3
-	docker push $(REGISTRY)/kennethreitz/httpbin
-	docker push $(REGISTRY)/curlimages/curl
 
 .PHONY: kind-up
 kind-up:
